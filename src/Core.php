@@ -60,7 +60,7 @@ class Core {
     }
 
 
-    private function openSession() {
+    protected function openSession() {
         $query = <<<XML
     <root   xmlns="http://spsr.ru/webapi/usermanagment/login/1.0">
         <p:Params Name="WALogin" Ver="1.0" xmlns:p="http://spsr.ru/webapi/WA/1.0" />
@@ -76,7 +76,7 @@ XML;
             throw new \RuntimeException('Wrong Authorization');
     }
 
-    private function closeSession() {
+    protected function closeSession() {
         $query = <<<XML
     <root   xmlns="http://spsr.ru/webapi/usermanagment/login/1.0">
         <p:Params Name="WALogin" Ver="1.0" xmlns:p="http://spsr.ru/webapi/WA/1.0" />
@@ -90,7 +90,7 @@ XML;
      * @param $body
      * @return \SimpleXMLElement
      */
-    private function makeXmlCall($body) {
+    protected function makeXmlCall($body) {
         if (!$body)
             throw new \InvalidArgumentException('No body for api call');
 
@@ -113,7 +113,7 @@ XML;
      * @param $path
      * @return \SimpleXMLElement
      */
-    private function makeGetCall($path) {
+    protected function makeGetCall($path) {
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $path);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
